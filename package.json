@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Starter Redux shell",
   "scripts": {
+    "prestart": "babel-node tools/startMessage.js",
     "start": "babel-node tools/srcServer.js"
    },
   "author": "David Acheson",
