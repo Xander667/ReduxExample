@@ -2,7 +2,9 @@
   "name": "pluralsight-redux-starter",
   "version": "1.0.0",
   "description": "Starter Redux shell",
-  "scripts": { },
+  "scripts": {
+    "start": "babel-node tools/srcServer.js"
+   },
   "author": "David Acheson",
   "license": "MIT",
   "dependencies": {
