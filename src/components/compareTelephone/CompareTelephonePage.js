@@ -68,9 +68,9 @@ class compareTelephonePage extends React.Component {
           </tr>
           <tr>
             <td> 4252132136233763 </td>
-            <td> s42wq321r5d62d3fv376f3 </td>
-            <td> False </td>
-            <td> {this.compareTelephoneNumbers('4252132136233763','s42wq321r5d62d3fv376f3')}  </td>
+            <td> 42d`521321fgttg36233gtr763rgt</td>
+            <td> True </td>
+            <td> {this.compareTelephoneNumbers('4252132136233763','42d`521321fgttg36233gtr763rgt')}  </td>
           </tr>
           <tr>
             <td>  </td>
