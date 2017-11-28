@@ -13,3 +13,12 @@
   nav {
     padding-top: 20px;
   }
+
+#codexpl th, #codexpl td{
+    padding:0.8em;
+    border: 1px solid;
+}
+#codexpl th{
+    background-color:#2294FF;
+    font-weight:bold;
+}

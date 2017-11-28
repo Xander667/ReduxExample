@@ -3,6 +3,8 @@ import {Route, IndexRoute} from 'react-router';
 import App from './components/App';
 import HomePage from './components/home/HomePage';
 import CoursesPage from './components/course/CoursesPage';
+//import PriorityQueuePage from './components/priorityQueue/PriorityQueuePage';
+import compareTelephonePage from './components/compareTelephone/CompareTelephonePage';
 // import ManageCoursePage from './components/course/ManageCoursePage'; //eslint-disable-line import/no-named-as-default
 import AboutPage from './components/about/AboutPage';
 
@@ -11,5 +13,6 @@ export default (
     <IndexRoute component={HomePage}/>
     <Route path="about" component={AboutPage}/>
     <Route path="courses" component={CoursesPage}/>
+    <Route path="compareTelephone" component={compareTelephonePage}/>
   </Route>
 );
