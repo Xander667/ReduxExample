@@ -9,64 +9,71 @@ const decimalBase = 10;
      * @returns True or False depending on if the numbers are the same
      */
     function compareTelephoneNumbers(phoneNumber1, phoneNumber2) {
-        if (!phoneNumber1 || !phoneNumber2) { return ('False'); }
+        if (!phoneNumber1 || !phoneNumber2) { return (false); }
     
+        let phoneNumber1Index = 0;
+        let phoneNumber2Index = 0;
 
-        // while loop both
+        // Loop through both strings until the end
+        while(phoneNumber1Index < phoneNumber1.length && phoneNumber2Index < phoneNumber2.length) {
 
-        //     while find numberA
+            // iterate first string until number is found
+            while(isNaN(phoneNumber1[phoneNumber1Index])) {
+                phoneNumber1Index++;
+            }
 
-        //     while find numberB
+            // iterate second string until number is found
+            while(isNaN(phoneNumber2[phoneNumber2Index])) {
+                phoneNumber2Index++;
+            }
 
-        //     compare
-    
-
-
-        let innerPointer = 0;
-        for (let index = 0; index < phoneNumber1.length; index++) {
-            if (parseInt(phoneNumber1[index], decimalBase)) {
-    
-                for (let innerIndex = innerPointer; innerIndex < phoneNumber2.length; innerIndex++) {
-                    if (parseInt(phoneNumber2[innerIndex], decimalBase)) { //is NaN
-                        if (phoneNumber1[index] !== phoneNumber2[innerIndex]) {
-                            return 'False';
-                        } else {
-                            innerPointer = ++innerIndex;
-                            break;
-                        }
-                    }
-                }
+            if (phoneNumber1[phoneNumber1Index] !== phoneNumber2[phoneNumber2Index]) {
+                return false;
+            } else {
+                // Found numbers match so far so increase pointers and continue
+                phoneNumber1Index++;
+                phoneNumber2Index++;
             }
         }
-    
-        return 'True';
+
+        return true;
     }
 
 describe('compareTelephoneNumbers input tests', () => {
 
     it('Number A and B are identical numbers', () => {
-        expect(compareTelephoneNumbers('333','333')).toEqual('True');
+        expect(compareTelephoneNumbers('333','333')).toEqual(true);
     });
 
     it('Number A is longer than Number B', () => {
-        expect(compareTelephoneNumbers('333ee','333')).toEqual('True');
+        expect(compareTelephoneNumbers('333ee','333')).toEqual(true);
     });
 
     it('Number B is longer than Number A', () => {
-        expect(compareTelephoneNumbers('333','ee333')).toEqual('True');
+        expect(compareTelephoneNumbers('333','ee333')).toEqual(true);
+    });
+
+    it('Both inputs are empty strings', () => {
+        expect(compareTelephoneNumbers('','')).toEqual(false);
+    });
+
+    it('Both inputs are null', () => {
+        expect(compareTelephoneNumbers(null, null)).toEqual(false);
+    });
+
+    it('Unicode with a wrong number', () => {
+        expect(compareTelephoneNumbers('☀2600☁2601☂2602', '425654822')).toEqual(false);
+    });
+
+    it('Unicode with a matching number', () => {
+        expect(compareTelephoneNumbers('☀2600☁2601☂2602', '.260-02601.2602')).toEqual(true);
     });
 
     it('Number A and Number B are different', () => {
-        expect(compareTelephoneNumbers('4233','333')).toEqual('False');
-        expect(compareTelephoneNumbers('','333')).toEqual('False');
-        expect(compareTelephoneNumbers(null, '333')).toEqual('False');
-        expect(compareTelephoneNumbers('3r2','')).toEqual('False');
-        expect(compareTelephoneNumbers('fgreer', null)).toEqual('False');
-        expect(compareTelephoneNumbers('Agreer', null)).toEqual('False');
-        expect(compareTelephoneNumbers('***greer', null)).toEqual('False');
+        expect(compareTelephoneNumbers('***greer', null)).toEqual(false);
     });
 
-    it('Lots of jibberish numbers?', () => {
-        expect(compareTelephoneNumbers('s425d62d3fv376f3','fdsbi42biu56biubui2bui3376b3')).toEqual('True');
+    it('Number A includes negative numbers', () => {
+        expect(compareTelephoneNumbers('-425648161', '425648161')).toEqual(true);
     });
 });

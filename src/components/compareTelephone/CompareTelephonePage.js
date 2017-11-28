@@ -2,27 +2,34 @@ import React, {PropTypes} from 'react';
 class compareTelephonePage extends React.Component {
 
     /// Add syntax
-    compareTelephoneNumbers(number1, number2) {
-      if(!number1 || !number2) { return ('False');}
+    compareTelephoneNumbers(phoneNumber1, phoneNumber2) {
+      if (!phoneNumber1 || !phoneNumber2) { return ('False'); }
+      
+          let phoneNumber1Index = 0;
+          let phoneNumber2Index = 0;
   
-      let innerPointer = 0;
-      for(let index=0; index<number1.length; index++) {
-        if(parseInt(number1[index], 10)) {  //const for 10
-
-          for(let innerIndex=innerPointer; innerIndex<number2.length; innerIndex++) {
-            if(parseInt(number2[innerIndex], 10)) {
-              if(number1[index] !== number2[innerIndex]) { 
-                return('False'); 
-              } else {
-                innerPointer = ++innerIndex;
-                break;
+          // Loop through both strings until the end
+          while(phoneNumber1Index < phoneNumber1.length && phoneNumber2Index < phoneNumber2.length) {
+  
+              // iterate first string until number is found
+              while(isNaN(phoneNumber1[phoneNumber1Index])) {
+                  phoneNumber1Index++;
               }
-            } 
-          }
-        }
-      }
   
-      return('True');
+              // iterate second string until number is found
+              while(isNaN(phoneNumber2[phoneNumber2Index])) {
+                  phoneNumber2Index++;
+              }
+  
+              if (phoneNumber1[phoneNumber1Index] !== phoneNumber2[phoneNumber2Index]) {
+                  return 'False';
+              } else {
+                  // Found numbers match so far so increase pointers and continue
+                  phoneNumber1Index++;
+                  phoneNumber2Index++;
+              }
+          }
+          return 'True';
   }
 
   render() {
@@ -83,6 +90,30 @@ class compareTelephonePage extends React.Component {
             <td> s42wq321r5d62d3fv376f3 </td>
             <td> False </td>
             <td> {this.compareTelephoneNumbers(null,'s42wq321r5d62d3fv376f3')}  </td>
+          </tr>
+          <tr>
+            <td> Empty String </td>
+            <td> Empty String </td>
+            <td> False </td>
+            <td> {this.compareTelephoneNumbers('','')}  </td>
+          </tr>   
+          <tr>
+            <td> null </td>
+            <td> null </td>
+            <td> False </td>
+            <td> {this.compareTelephoneNumbers(null, null)}  </td>
+          </tr>   
+          <tr>
+            <td> 4256233765 </td>
+            <td> '☀2600☁2601☂2602' </td>
+            <td> False </td>
+            <td> {this.compareTelephoneNumbers('4256233765','☀2600☁2601☂2602')}  </td>
+          </tr>
+          <tr>
+            <td> ☀2600☁2601☂2602 </td>
+            <td> ☀2600☁2601☂2602 </td>
+            <td> True </td>
+            <td> {this.compareTelephoneNumbers('☀2600☁2601☂2602','☀2600☁2601☂2602')}  </td>
           </tr>
         </table>
         <p></p>
