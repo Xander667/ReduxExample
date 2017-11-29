@@ -1,7 +1,5 @@
 import expect from 'expect';
 
-const decimalBase = 10;
-
     /**
      * Compare two strings and verify if the numbers are the same, all else ignored.
      * @param phoneNumber1 first telephone number string
@@ -11,20 +9,24 @@ const decimalBase = 10;
     function compareTelephoneNumbers(phoneNumber1, phoneNumber2) {
         if (!phoneNumber1 || !phoneNumber2) { return (false); }
     
+        // Two pointers to walk through input strings
         let phoneNumber1Index = 0;
         let phoneNumber2Index = 0;
 
         // Loop through both strings until the end
         while(phoneNumber1Index < phoneNumber1.length && phoneNumber2Index < phoneNumber2.length) {
 
-            // iterate first string until number is found
+            // iterate first string until a number is found
             while(isNaN(phoneNumber1[phoneNumber1Index])) {
                 phoneNumber1Index++;
+                // incase the string contains no numbers
+                if(phoneNumber1Index > phoneNumber1.length) { return false; }
             }
 
             // iterate second string until number is found
             while(isNaN(phoneNumber2[phoneNumber2Index])) {
                 phoneNumber2Index++;
+                if(phoneNumber2Index > phoneNumber2.length) { return false; }
             }
 
             if (phoneNumber1[phoneNumber1Index] !== phoneNumber2[phoneNumber2Index]) {
@@ -40,6 +42,14 @@ const decimalBase = 10;
     }
 
 describe('compareTelephoneNumbers input tests', () => {
+
+    it('Number A is a long string neither contain numbers', () => {
+        expect(compareTelephoneNumbers('sfghbuliurehilrliglhdfdgfldfhgulilui', 'f')).toEqual(false);
+    });
+
+    it('Number B is a long string neither contain numbers', () => {
+        expect(compareTelephoneNumbers('f', 'sfghbuliurehilrliglhdfdgfldfhgulilui')).toEqual(false);
+    });
 
     it('Number A and B are identical numbers', () => {
         expect(compareTelephoneNumbers('333','333')).toEqual(true);
